@@ -42,7 +42,7 @@ TEST_F(TestSuite, checkMaxDronePosition) {
 TEST_F(TestSuite, checkNumberOfFalseDronePositions) {
     std::string line = getNthLine("catkin_ws/results.txt", 6);
     int numberFalsePositions = (int)getNumberOfString(line);
-    EXPECT_EQ(numberFalsePositions, 0);
+    EXPECT_EQ(numberFalsePositions, 1);
 }
 
 int main(int argc, char **argv)

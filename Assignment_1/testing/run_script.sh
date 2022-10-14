@@ -10,7 +10,8 @@ cmake ..
 make
 cd ../../../..
 file="catkin_ws/results.txt"
-echo "\n"
+echo ""
+echo ""
 if [ -f "$file" ]
 then
 	cat $file
