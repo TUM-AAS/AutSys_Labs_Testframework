@@ -12,4 +12,9 @@ then
 else
 	echo "No results available."
 fi
+cd AutSys_Labs_Testframework/Assignment_1/testing
+mkdir build
+cd build
+cmake ..
+make
 ./AutSys_Labs_Testframework/Assignment_1/testing/build/runTest

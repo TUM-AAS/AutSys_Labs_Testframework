@@ -6,8 +6,3 @@ git clone https://github.com/ethz-asl/mav_comm.git
 cd ..
 catkin init
 catkin build
-cd ../AutSys_Labs_Testframework/Assignment_2/testing
-mkdir build
-cd build
-cmake ..
-make

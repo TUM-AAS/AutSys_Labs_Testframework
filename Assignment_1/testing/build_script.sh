@@ -5,8 +5,4 @@ ls catkin_ws/src
 cd catkin_ws
 catkin init
 catkin build
-cd ../AutSys_Labs_Testframework/Assignment_1/testing
-mkdir build
-cd build
-cmake ..
-make
+
