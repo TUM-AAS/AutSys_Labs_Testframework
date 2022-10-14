@@ -3,7 +3,12 @@ source /opt/ros/noetic/setup.bash
 cd catkin_ws
 source devel/setup.bash
 roslaunch testframework test.launch
-cd ..
+cd ../AutSys_Labs_Testframework/Assignment_1/testing
+mkdir build
+cd build
+cmake ..
+make
+cd ../../../..
 file="catkin_ws/results.txt"
 echo "\n"
 if [ -f "$file" ]
@@ -12,9 +17,4 @@ then
 else
 	echo "No results available."
 fi
-cd AutSys_Labs_Testframework/Assignment_1/testing
-mkdir build
-cd build
-cmake ..
-make
 ./AutSys_Labs_Testframework/Assignment_1/testing/build/runTest
