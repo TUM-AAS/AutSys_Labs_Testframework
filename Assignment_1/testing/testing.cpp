@@ -32,17 +32,17 @@ TEST_F(TestSuite, checkReportedCalls)  {
 TEST_F(TestSuite, checkAverageDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 4);
     double averageDeviation = getNumberOfString(line);
-    EXPECT_LE(averageDeviation, 0.05);
+    EXPECT_LE(averageDeviation, 0.075);
 }
 TEST_F(TestSuite, checkMaxDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 5);
     double maxDeviation = getNumberOfString(line);
-    EXPECT_LE(maxDeviation, 0.1);
+    EXPECT_LE(maxDeviation, 0.25);
 }
 TEST_F(TestSuite, checkNumberOfFalseDronePositions) {
     std::string line = getNthLine("catkin_ws/results.txt", 6);
     int numberFalsePositions = (int)getNumberOfString(line);
-    EXPECT_EQ(numberFalsePositions, 0);
+    EXPECT_EQ(numberFalsePositions, 1);
 }
 
 int main(int argc, char **argv)
