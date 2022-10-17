@@ -1,7 +1,7 @@
 #include <ros/ros.h>
-#include <tf2_msgs/TFMessage.h>
 #include <eigen3/Eigen/Core>
 #include <nav_msgs/Odometry.h>
+#include <mav_msgs/Actuators.h>
 #include <trajectory_msgs/MultiDOFJointTrajectoryPoint.h>
 
 #include <fstream>
@@ -9,9 +9,10 @@
 class Controller_test  {
 public:
     Controller_test(ros::NodeHandle nh_) : nh(nh_), maxDeviation(0.0), averageDeviation(0.0),
-                numberCalls(0), numberDeviationOutsideThreshold(0), referencePosition(0.0,0.0,0.0) {
+                numberCalls(0), numberDeviationOutsideThreshold(0), referencePosition(0.0,0.0,0.0), minWrench(10000.0, 10.0, 10.0, 10.0), maxWrench(-10000, -10.0, -10.0, -10.0), numberCallsPropSpeeds(0) {
         sub_dronePosition = nh.subscribe("current_state", 5, &Controller_test::checkDronePosition, this);
         sub_desPosition = nh.subscribe("desired_state", 5, &Controller_test::saveReferencePosition, this);
+        sub_rotorSpeedCmds = nh.subscribe("rotor_speed_cmds", 5, &Controller_test::checkRotorSpeeds, this);
         startup_time = ros::Time::now();
         
         t_checkRunTime = nh.createTimer(ros::Duration(0.1), &Controller_test::checkRunTime, this);
@@ -25,6 +26,37 @@ public:
         if(time > 50.0) {
             writeTestResult();
             ros::shutdown();
+        }
+    }
+
+    static double signed_pow2(double val) {
+        return val>0?pow(val,2):-pow(val,2);
+    }
+
+    void checkRotorSpeeds(const mav_msgs::Actuators& rotor_speeds) {
+        numberCallsPropSpeeds++;
+    	Eigen::Vector4d props;
+        for(int i = 0; i < 4; i++) {
+            props[i] = signed_pow2(rotor_speeds.angular_velocities[i]);
+        }      
+        
+        const double d_hat = 0.3/sqrt(2);
+        const double cd = 1e-5;
+        const double cf = 1e-3;
+	    Eigen::Matrix4d F;
+
+	    F << cf, cf, cf, cf, 
+		    cf*d_hat, cf*d_hat, -cf*d_hat, -cf*d_hat, 
+		    -cf*d_hat, cf*d_hat, cf*d_hat, -cf*d_hat,
+		    cd, -cd, cd, -cd;
+
+    
+        Eigen::Vector4d wrench = F*props;
+        for(int i = 0; i < 4; i++) {
+            if(wrench[i] < minWrench[i])
+                minWrench[i] = wrench[i];
+            else if(wrench[i] > maxWrench[i])
+                maxWrench[i] = wrench[i];
         }
     }
 
@@ -64,11 +96,22 @@ public:
             maxDeviation = std::nan("");
             numberDeviationOutsideThreshold = INT_MAX;
         }
+        if(numberCallsPropSpeeds == 0) {
+            maxWrench = {-std::nan(""),-std::nan(""),-std::nan(""),-std::nan("")};
+            minWrench = {std::nan(""),std::nan(""),std::nan(""),std::nan("")};
+        }
+        if(abs(minWrench[0]) < 1e10)
+            minWrench[0] = 0;
+        else if(minWrench[0] > -1e10)
+        	minWrench[0] = -0.01
         results << "##########################\nResult Report:\n"
             << "Tested drone positions: " << numberCalls << std::endl
             << "Average deviation from optimal route: " << averageDeviation / (double)numberCalls << std::endl
             << "Maximum deviation from optimal route: " << maxDeviation << std::endl
             << "Number of drone positions outside flight path threshold: " << numberDeviationOutsideThreshold << std::endl
+            << "Tested rotor speed commands: " << numberCallsPropSpeeds << std::endl
+            << "Received (elementwise) maximum wrench: " << maxWrench[0] << ", " << maxWrench[1] << ", " << maxWrench[2] << ", " << maxWrench[3] << "\n"
+            << "Received (elementwise) minimum wrench: " << minWrench[0] << ", " << minWrench[1] << ", " << minWrench[2] << ", " << minWrench[3] << "\n"
             << "##########################\n\n";
         results.close();
     }
@@ -78,6 +121,7 @@ private:
     ros::Time startup_time;
     ros::Subscriber sub_dronePosition;
     ros::Subscriber sub_desPosition;
+    ros::Subscriber sub_rotorSpeedCmds;
     ros::Timer t_checkRunTime;
 
     Eigen::Vector3d referencePosition;
@@ -86,6 +130,9 @@ private:
     double averageDeviation;
     int numberDeviationOutsideThreshold;
     int numberCalls;
+    unsigned long numberCallsPropSpeeds;
+    Eigen::Vector4d minWrench;
+    Eigen::Vector4d maxWrench;
 };
 
 int main(int argc, char **argv) {

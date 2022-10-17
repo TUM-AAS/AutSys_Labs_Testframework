@@ -32,7 +32,7 @@ TEST_F(TestSuite, checkReportedCalls)  {
 TEST_F(TestSuite, checkAverageDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 4);
     double averageDeviation = getNumberOfString(line);
-    EXPECT_LE(averageDeviation, 0.25);
+    EXPECT_LE(averageDeviation, 0.3);
 }
 TEST_F(TestSuite, checkMaxDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 5);
@@ -43,6 +43,23 @@ TEST_F(TestSuite, checkNumberOfFalseDronePositions) {
     std::string line = getNthLine("catkin_ws/results.txt", 6);
     int numberFalsePositions = (int)getNumberOfString(line);
     EXPECT_EQ(numberFalsePositions, 0);
+}
+TEST_F(TestSuite, checkReportedRotorSpeedCalls) {
+    std::string line = getNthLine("catkin_ws/results.txt", 7);
+    unsigned long numberCallsRotorSpeeds = (unsigned long)getNumberOfString(line);
+    line = getNthLine("catkin_ws/results.txt", 3);
+    int numberCalls = (int)getNumberOfString(line);
+    EXPECT_GT(numberCallsRotorSpeeds, numberCalls*15.0);
+}
+TEST_F(TestSuite, checkMinimumWrench) {
+    std::string line = getNthLine("catkin_ws/results.txt", 9);
+    double minForce = getNumberOfString(line);
+    EXPECT_GT(minForce, -1e-10);
+}
+TEST_F(TestSuite, checkMaximumWrench) {
+    std::string line = getNthLine("catkin_ws/results.txt", 8);
+    double maxForce = getNumberOfString(line);
+    EXPECT_LE(maxForce, 3500.0);
 }
 
 int main(int argc, char **argv)
