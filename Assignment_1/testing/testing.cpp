@@ -44,6 +44,21 @@ TEST_F(TestSuite, checkNumberOfFalseDronePositions) {
     int numberFalsePositions = (int)getNumberOfString(line);
     EXPECT_EQ(numberFalsePositions, 0);
 }
+TEST_F(TestSuite, checkPlotsPublisher) { 
+    std::ifstream code ("catkin_ws/src/two_drones_pkg/src/plots_publisher_node.cpp");
+    EXPECT_TRUE(code.is_open());
+    std::stringstream buf;
+    buf << code.rdbuf();
+    std::string input = buf.str();
+    std::string test = "waitForTransform";
+    auto pos = input.find(test);
+    pos = input.find(test, pos+1);
+    EXPECT_NE(pos, std::string::npos);
+    test = "lookupTransform";
+    pos = input.find(test);
+    pos = input.find(test, pos+1);
+    EXPECT_NE(pos, std::string::npos);
+}
 
 int main(int argc, char **argv)
 {
