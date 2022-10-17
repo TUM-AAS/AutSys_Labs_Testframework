@@ -1,5 +1,6 @@
 #!/bin/bash
 if [$1 -eq 1]
+then
 	source /opt/ros/noetic/setup.bash
 	cd catkin_ws
 	source devel/setup.bash
