@@ -18,4 +18,4 @@ then
 else
 	echo "No results available."
 fi
-./AutSys_Labs_Testframework/Assignment_1/testing/build/runTest
+./AutSys_Labs_Testframework/Assignment_1/testing/build/runTest --gtest_filter=$1
