@@ -5,4 +5,4 @@ cd catkin_ws/src
 git clone https://github.com/ethz-asl/mav_comm.git
 cd ..
 catkin init
-catkin build
+catkin build -DTEST_FLAG=0
