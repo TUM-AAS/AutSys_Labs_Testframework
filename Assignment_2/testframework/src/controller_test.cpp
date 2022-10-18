@@ -73,8 +73,6 @@ public:
         }
         Eigen::Vector3d dronePosition;
         dronePosition << cur_state.pose.pose.position.x, cur_state.pose.pose.position.y, cur_state.pose.pose.position.z;
-        ROS_INFO_STREAM(dronePosition);
-        ROS_WARN_STREAM(referencePosition);
         double deviation = (dronePosition-referencePosition).norm();
         averageDeviation += deviation;
         if(deviation > maxDeviation)
@@ -102,8 +100,6 @@ public:
         }
         if(abs(minWrench[0]) < 1e10)
             minWrench[0] = 0;
-        else if(minWrench[0] > -1e10)
-        	minWrench[0] = -0.01
         results << "##########################\nResult Report:\n"
             << "Tested drone positions: " << numberCalls << std::endl
             << "Average deviation from optimal route: " << averageDeviation / (double)numberCalls << std::endl
