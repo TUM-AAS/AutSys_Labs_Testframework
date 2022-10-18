@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <string>
-#include <stdio>
+#include <iostream>
 
 class TestSuite : public ::testing::Test {
 public:
