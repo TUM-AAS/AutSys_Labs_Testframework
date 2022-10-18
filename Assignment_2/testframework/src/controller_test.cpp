@@ -106,8 +106,6 @@ public:
             maxWrench = {-std::nan(""),-std::nan(""),-std::nan(""),-std::nan("")};
             minWrench = {std::nan(""),std::nan(""),std::nan(""),std::nan("")};
         }
-        if(abs(minWrench[0]) < 1e10)
-            minWrench[0] = 0;
         averageWrench /= numberCallsPropSpeeds;
         results << "##########################\nResult Report:\n"
             << "Tested drone positions: " << numberCalls << std::endl
