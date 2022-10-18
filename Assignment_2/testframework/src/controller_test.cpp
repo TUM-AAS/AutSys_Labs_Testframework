@@ -5,11 +5,13 @@
 #include <trajectory_msgs/MultiDOFJointTrajectoryPoint.h>
 
 #include <fstream>
+#define START_TIME 5.0
+#define SHUTDOWN_TIME 30.0
 
 class Controller_test  {
 public:
     Controller_test(ros::NodeHandle nh_) : nh(nh_), maxDeviation(0.0), averageDeviation(0.0),
-                numberCalls(0), numberDeviationOutsideThreshold(0), referencePosition(0.0,0.0,0.0), minWrench(10000.0, 10.0, 10.0, 10.0), maxWrench(-10000, -10.0, -10.0, -10.0), numberCallsPropSpeeds(0) {
+                numberCalls(0), numberDeviationOutsideThreshold(0), referencePosition(0.0,0.0,0.0), minWrench(10000.0, 10.0, 10.0, 10.0), maxWrench(-10000, -10.0, -10.0, -10.0), averageWrench(0.0,0.0,0.0,0.0), numberCallsPropSpeeds(0) {
         sub_dronePosition = nh.subscribe("current_state", 5, &Controller_test::checkDronePosition, this);
         sub_desPosition = nh.subscribe("desired_state", 5, &Controller_test::saveReferencePosition, this);
         sub_rotorSpeedCmds = nh.subscribe("rotor_speed_cmds", 5, &Controller_test::checkRotorSpeeds, this);
@@ -23,7 +25,7 @@ public:
     void checkRunTime(const ros::TimerEvent& t) {
         ros::Time actual_time = ros::Time::now();
         double time = (actual_time - startup_time).toSec();
-        if(time > 50.0) {
+        if(time > SHUTDOWN_TIME) {
             writeTestResult();
             ros::shutdown();
         }
@@ -34,6 +36,11 @@ public:
     }
 
     void checkRotorSpeeds(const mav_msgs::Actuators& rotor_speeds) {
+    	ros::Time actual_time = ros::Time::now();
+        double time = (actual_time - startup_time).toSec();
+        while(time < START_TIME) {
+            return;
+        }
         numberCallsPropSpeeds++;
     	Eigen::Vector4d props;
         for(int i = 0; i < 4; i++) {
@@ -52,6 +59,7 @@ public:
 
     
         Eigen::Vector4d wrench = F*props;
+        averageWrench += wrench;
         for(int i = 0; i < 4; i++) {
             if(wrench[i] < minWrench[i])
                 minWrench[i] = wrench[i];
@@ -68,7 +76,7 @@ public:
     void checkDronePosition(const nav_msgs::Odometry& cur_state) {
         ros::Time actual_time = ros::Time::now();
         double time = (actual_time - startup_time).toSec();
-        while(time < 10.0) {
+        while(time < START_TIME) {
             return;
         }
         Eigen::Vector3d dronePosition;
@@ -100,12 +108,14 @@ public:
         }
         if(abs(minWrench[0]) < 1e10)
             minWrench[0] = 0;
+        averageWrench /= numberCallsPropSpeeds;
         results << "##########################\nResult Report:\n"
             << "Tested drone positions: " << numberCalls << std::endl
             << "Average deviation from optimal route: " << averageDeviation / (double)numberCalls << std::endl
             << "Maximum deviation from optimal route: " << maxDeviation << std::endl
             << "Number of drone positions outside flight path threshold: " << numberDeviationOutsideThreshold << std::endl
             << "Tested rotor speed commands: " << numberCallsPropSpeeds << std::endl
+            << "Received (elementwise) average wrench: " << averageWrench[0] << ", " << averageWrench[1] << ", " << averageWrench[2] << ", " << averageWrench[3] << "\n"
             << "Received (elementwise) maximum wrench: " << maxWrench[0] << ", " << maxWrench[1] << ", " << maxWrench[2] << ", " << maxWrench[3] << "\n"
             << "Received (elementwise) minimum wrench: " << minWrench[0] << ", " << minWrench[1] << ", " << minWrench[2] << ", " << minWrench[3] << "\n"
             << "##########################\n\n";
@@ -129,6 +139,7 @@ private:
     unsigned long numberCallsPropSpeeds;
     Eigen::Vector4d minWrench;
     Eigen::Vector4d maxWrench;
+    Eigen::Vector4d averageWrench;
 };
 
 int main(int argc, char **argv) {

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <fstream>
 #include <string>
+#include <eigen3/Eigen/Core>
 
 class TestSuite : public ::testing::Test {
 public:
@@ -22,6 +23,19 @@ public:
         double number = std::stod(numberStr);
         return number;
     }
+    
+    Eigen::Vector4d getVectorOfString(std::string line) {
+    	Eigen::Vector4d vec;
+		auto posStart = line.find(": ") + 2;
+		auto posStop = line.find("\n");
+		EXPECT_NE(posStart, std::string::npos);
+		std::stringstream vectorStr;
+		vectorStr << line.substr(posStart, posStop);
+		for(int i = 0; i < 4; i++)  {
+			vectorStr >> vec[i];
+        }
+        return vec;
+    }
 };
 TEST_F(TestSuite, checkReportedCalls)  {
     std::string line = getNthLine("catkin_ws/results.txt", 3);
@@ -32,7 +46,7 @@ TEST_F(TestSuite, checkReportedCalls)  {
 TEST_F(TestSuite, checkAverageDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 4);
     double averageDeviation = getNumberOfString(line);
-    EXPECT_LE(averageDeviation, 0.3);
+    EXPECT_LE(averageDeviation, 0.25);
 }
 TEST_F(TestSuite, checkMaxDronePosition) {
     std::string line = getNthLine("catkin_ws/results.txt", 5);
@@ -51,15 +65,16 @@ TEST_F(TestSuite, checkReportedRotorSpeedCalls) {
     int numberCalls = (int)getNumberOfString(line);
     EXPECT_GT(numberCallsRotorSpeeds, numberCalls*15.0);
 }
-TEST_F(TestSuite, checkMinimumWrench) {
-    std::string line = getNthLine("catkin_ws/results.txt", 9);
-    double minForce = getNumberOfString(line);
-    EXPECT_GT(minForce, -1e-10);
-}
-TEST_F(TestSuite, checkMaximumWrench) {
+TEST_F(TestSuite, checkAverageWrench) {
     std::string line = getNthLine("catkin_ws/results.txt", 8);
-    double maxForce = getNumberOfString(line);
-    EXPECT_LE(maxForce, 3500.0);
+    Eigen::Vector4d averageWrench = getVectorOfString(line);
+    Eigen::Vector4d maxAverageWrench(14.0, 0.01, 0.01, 0.05);
+    Eigen::Vector4d minAverageWrench(10.0, -0.05, -0.12, -0.05);
+    for(int i = 0; i < 4; i++) {
+		EXPECT_GE(averageWrench[i], minAverageWrench[i]);
+		EXPECT_LE(averageWrench[i], maxAverageWrench[i]);
+    }
+
 }
 
 int main(int argc, char **argv)
