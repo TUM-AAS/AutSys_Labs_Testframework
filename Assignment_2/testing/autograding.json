@@ -61,19 +61,8 @@
       "points": 5
     },
     {
-      "name": "Run Testframework: check minimum wrench",
+      "name": "Run Testframework: check average wrench",
       "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
-      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkMinimumWrench",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 50,
-      "points": 5
-    },
-    {
-      "name": "Run Testframework: check maximum wrench",
-      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
-      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkMaximumWrench",
       "input": "",
       "output": "",
       "comparison": "included",

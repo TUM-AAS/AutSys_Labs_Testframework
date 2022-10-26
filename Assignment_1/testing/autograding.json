@@ -49,6 +49,17 @@
       "comparison": "included",
       "timeout": 50,
       "points": 5
+    },
+    {
+      "name": "Run Testframework: check rVIZ plots",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_1/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_1/testing/run_script.sh 0 TestSuite.checkPlotsPublisher",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
     }
   ]
 }
+
