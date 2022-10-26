@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "name": "Build source code",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/build_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/build_script.sh",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check Reported Calls",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 1 TestSuite.checkReportedCalls",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check average drone deviation",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkAverageDronePosition",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check maximum drone deviation",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkMaxDronePosition",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check number of drone positions outside envelope",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkNumberOfFalseDronePositions",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check reported rotor speed calls",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkRotorSpeedCalls",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check minimum wrench",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkMinimumWrench",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    },
+    {
+      "name": "Run Testframework: check maximum wrench",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "run": "./AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkMaximumWrench",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 50,
+      "points": 5
+    }
+  ]
+}
