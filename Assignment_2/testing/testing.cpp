@@ -75,8 +75,8 @@ TEST_F(TestSuite, checkAverageWrench) {
 	std::cout << "Checks if the average of all reported wrenches are as expected\n"; 
     std::string line = getNthLine("catkin_ws/results.txt", 8);
     Eigen::Vector4d averageWrench = getVectorOfString(line);
-    Eigen::Vector4d maxAverageWrench(14.0, 0.01, 0.01, 0.05);
-    Eigen::Vector4d minAverageWrench(10.0, -0.05, -0.12, -0.05);
+    Eigen::Vector4d maxAverageWrench(12.0, 0.01, 0.01, 0.05);
+    Eigen::Vector4d minAverageWrench(9.81, -0.05, -0.12, -0.05);
     for(int i = 0; i < 4; i++) {
 		EXPECT_GE(averageWrench[i], minAverageWrench[i]);
 		EXPECT_LE(averageWrench[i], maxAverageWrench[i]);
