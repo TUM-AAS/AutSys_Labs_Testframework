@@ -62,7 +62,7 @@
     },
     {
       "name": "Run Testframework: check average wrench",
-      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh",
+      "setup": "chmod +x AutSys_Labs_Testframework/Assignment_2/testing/run_script.sh 0 TestSuite.checkAverageWrench",
       "input": "",
       "output": "",
       "comparison": "included",
