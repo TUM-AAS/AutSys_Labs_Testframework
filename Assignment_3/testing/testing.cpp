@@ -132,7 +132,7 @@ TEST_F(TestSuite, checkGoalSequence) {
     }
 }
 
-TEST_F(TestSuite, checkNumberOfTransistions) {
+TEST_F(TestSuite, checkNumberOfTransitions) {
     std::cout << "Checks weather each goal was passed exactly 2 times\n";
     int numberGoals = getGoalNumber();
     for(int i = 0; i < numberGoals; i++) {
