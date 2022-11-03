@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <node name="vnav_sim" pkg="unity_bridge" type="Linux_server_build.x86_64"/>
+  <node name="vnav_sim" pkg="unity_bridge" type="Linux_build_server.x86_64"/>
   <node name="w_to_unity" pkg="unity_bridge" type="w_to_unity"/>
   <node name="unity_state" pkg="unity_bridge" type="unity_state"/>
   <node name="controller_node" pkg="controller_pkg" type="controller_node" clear_params="true"/>
