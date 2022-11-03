@@ -13,7 +13,7 @@
       {
         "name": "Run Testframework: check flight time",
         "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
-        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkFlightTime",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 1 TestSuite.checkFlightTime",
         "input": "",
         "output": "",
         "comparison": "included",
@@ -23,7 +23,7 @@
       {
         "name": "Run Testframework: check Reported Calls",
         "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
-        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 1 TestSuite.checkReportedCalls",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkReportedCalls",
         "input": "",
         "output": "",
         "comparison": "included",
