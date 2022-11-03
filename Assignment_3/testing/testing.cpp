@@ -138,6 +138,7 @@ TEST_F(TestSuite, checkNumberOfTransitions) {
     for(int i = 0; i < numberGoals; i++) {
         std::string line = getNthLine(filename, 10+i);
         int transitionNumber = (int)getNumberOfString(line);
+        std::cout << transitionNumber << std::endl;
         EXPECT_EQ(transitionNumber, 2);
     }
 }
