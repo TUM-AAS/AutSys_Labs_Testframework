@@ -63,11 +63,10 @@ TEST_F(TestSuite, checkNumberOfFalseDronePositions) {
     int numberFalsePositions = (int)getNumberOfString(line);
     EXPECT_EQ(numberFalsePositions, 0);
 }
-TEST_F(TestSuite, checkReportedRotorSpeedCalls) {
+TEST_F(TestSuite, checkRotorSpeedCalls) {
 	std::cout << "Checks weather enough calls for a rotor speed comparison were sent\n";
     std::string line = getNthLine("catkin_ws/results.txt", 7);
     unsigned long numberCallsRotorSpeeds = (unsigned long)getNumberOfString(line);
-	std::cout << numberCallsRotorSpeeds << std::endl;
     line = getNthLine("catkin_ws/results.txt", 3);
     int numberCalls = (int)getNumberOfString(line);
     EXPECT_GT(numberCallsRotorSpeeds, numberCalls*15.0);
