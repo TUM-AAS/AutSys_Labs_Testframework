@@ -61,16 +61,6 @@
         "points": 5
       },
       {
-        "name": "Run Testframework: check maximum drone deviation",
-        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
-        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkMaxDronePosition",
-        "input": "",
-        "output": "",
-        "comparison": "included",
-        "timeout": 50,
-        "points": 5
-      },
-      {
         "name": "Run Testframework: check goal sequence",
         "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
         "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkGoalSequence",
