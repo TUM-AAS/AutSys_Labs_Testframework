@@ -133,7 +133,7 @@ TEST_F(TestSuite, checkGoalSequence) {
 }
 
 TEST_F(TestSuite, checkNumberOfTransistions) {
-    std::cout << "Checks weather each goal was reached 2 times\n";
+    std::cout << "Checks weather each goal was passed exactly 2 times\n";
     int numberGoals = getGoalNumber();
     for(int i = 0; i < numberGoals; i++) {
         std::string line = getNthLine(filename, 10+i);
