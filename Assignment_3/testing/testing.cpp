@@ -135,10 +135,10 @@ TEST_F(TestSuite, checkGoalSequence) {
 TEST_F(TestSuite, checkNumberOfTransitions) {
     std::cout << "Checks weather each goal was passed exactly 2 times\n";
     int numberGoals = getGoalNumber();
+    ESPECT_GT(numberGoals, 0);
     for(int i = 0; i < numberGoals; i++) {
         std::string line = getNthLine(filename, 10+i);
         int transitionNumber = (int)getNumberOfString(line);
-        std::cout << transitionNumber << std::endl;
         EXPECT_EQ(transitionNumber, 2);
     }
 }
