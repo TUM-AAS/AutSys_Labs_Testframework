@@ -1,0 +1,104 @@
+{
+    "tests": [
+      {
+        "name": "Build source code",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/build_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/build_script.sh",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check flight time",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkFlightTime",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check Reported Calls",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 1 TestSuite.checkReportedCalls",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check reported rotor speed calls",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkReportedRotorSpeedCalls",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check maximum wrench",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkMaximumWrench",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check minimum wrench",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkMinimumWrench",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check maximum drone deviation",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkMaxDronePosition",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check goal sequence",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkGoalSequence",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check number of goal transitions",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkNumberOfTransitions",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Run Testframework: check stop positions",
+        "setup": "chmod +x AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh",
+        "run": "./AutSys_Labs_Testframework/Assignment_3/testing/run_script.sh 0 TestSuite.checkStopPositions",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      }
+    ]
+  }
