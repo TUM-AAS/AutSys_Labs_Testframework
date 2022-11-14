@@ -108,7 +108,7 @@ void Trajectory_test::checkDronePosition(const nav_msgs::Odometry& cur_state) {
 
 void Trajectory_test::checkGoalPositions(Eigen::Vector3d dronePosition) {
     for(size_t i = 0; i < referencePositions.size(); i++) {
-        if(abs((dronePosition-referencePositions[i]).norm()) < 0.2) {
+        if(abs((dronePosition-referencePositions[i]).norm()) < 0.5) {
             if(droneAtGoalPosition[i] != 1) {
                 positionSequence.push_back(i);
                 reachedPositionNTimes[i]++;
