@@ -98,7 +98,7 @@ TEST_F(TestSuite, checkMaximumWrench) {
 	std::cout << "Checks if the maximum of all reported wrenches are as expected\n"; 
     std::string line = getNthLine(filename, 6);
     std::vector<double> maxWrench = getVectorOfString(line);
-    Eigen::Vector4d maximalExpectedWrench(50.0, 10.0, 10.0, 10.0);
+    Eigen::Vector4d maximalExpectedWrench(30.0, 2.25, 5.0, 2.0);
     for(int i = 0; i < 4; i++) {
 		EXPECT_LE(maxWrench[i], maximalExpectedWrench[i]);
     }
@@ -109,7 +109,7 @@ TEST_F(TestSuite, checkMinimumWrench) {
 	std::cout << "Checks if the minimum of all reported wrenches are as expected\n"; 
     std::string line = getNthLine(filename, 7);
     std::vector<double> minWrench = getVectorOfString(line);
-    Eigen::Vector4d minimalExpectedWrench(3.0, -10.0, -10.0, -10.0);
+    Eigen::Vector4d minimalExpectedWrench(0.0, -2.25, -5.0, -2.0);
     for(int i = 0; i < 4; i++) {
 		EXPECT_GE(minWrench[i], minimalExpectedWrench[i]);
     }

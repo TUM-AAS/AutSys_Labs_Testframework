@@ -98,7 +98,7 @@ void Trajectory_test::checkDronePosition(const nav_msgs::Odometry& cur_state) {
     Eigen::Vector3d lastStopPosition;
     if(stopPositions.size() > 0)
         lastStopPosition << stopPositions.back()[1], stopPositions.back()[2], stopPositions.back()[3];
-    if(vel.norm() < 0.04 && dronePosition.norm() > 0.1 && (stopPositions.size() == 0 || (dronePosition-lastStopPosition).norm() > 0.04)) {
+    if(vel.norm() < 0.03 && dronePosition.norm() > 0.1 && (stopPositions.size() == 0 || (dronePosition-lastStopPosition).norm() > 0.04)) {
         ros::Time actual_time = ros::Time::now();
         double time = (actual_time - startup_time).toSec();
         Eigen::Vector4d stopPosition(time, dronePosition[0], dronePosition[1], dronePosition[2]);
