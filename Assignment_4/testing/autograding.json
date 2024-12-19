@@ -1,0 +1,34 @@
+{
+    "tests": [
+      {
+        "name": "Check intrinsic parameters",
+        "setup": "cp ./AutSys_Labs_Testframework/Assignment_4/testing/test.py ./",
+        "run": "pytest test.py::test_intrinsic --maxfail=1 --disable-warnings -q",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Check extrinsic parameters",
+        "setup": "cp ./AutSys_Labs_Testframework/Assignment_4/testing/test.py ./",
+        "run": "pytest test.py::test_extrinsic --maxfail=1 --disable-warnings -q",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      },
+      {
+        "name": "Check distortion parameters",
+        "setup": "cp ./AutSys_Labs_Testframework/Assignment_4/testing/test.py ./",
+        "run": "pytest test.py::test_distortion --maxfail=1 --disable-warnings -q",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 50,
+        "points": 5
+      }
+    ]
+  }
